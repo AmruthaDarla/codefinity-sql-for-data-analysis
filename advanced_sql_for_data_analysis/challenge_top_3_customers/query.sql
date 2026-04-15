@@ -1,0 +1,7 @@
+-- Write your code here
+select c.customer_id, c.first_name, c,last_name, sum(s.quantity) as total_quantity,
+    rank() over (order by sum(s.quantity) desc) as customer_rank
+from customers c join sales s on c.customer_id=s.customer_id
+group by c.customer_id, c.first_name, c.last_name
+order by customer_rank
+limit 3;
